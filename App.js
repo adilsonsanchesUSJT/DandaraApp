@@ -39,29 +39,9 @@ export const store = createStore(
 );
 
 const App = () => {
-  const [socketConnectionReady, setSocketConnectionReady] = useState(false)
-
-  /**
-   * @returns {establishes a connection with SignalR to receive events}
-   */
-  useEffect(() => {
-    if (!socketConnectionReady) {
-      WebSocketSignalR.initSocketConnection(() => {
-        setSocketConnectionReady(true)
-      })
-    }
-  }, [])
-
-  /**
-   * @returns {creating navigation}
-   */
-  const Navigation = useNavigation();
-
   return (
     <View style={{ flex: 1 }}>
-      {socketConnectionReady && (
-        useNavigation()
-      )}
+      {useNavigation()}
     </View>
   );
 };
