@@ -3,7 +3,6 @@ import React from 'react';
 import {
   View,
   StatusBar,
-  Dimensions,
   Image,
   ScrollView,
   Linking
@@ -18,8 +17,6 @@ import styled from 'styled-components';
  * @description region styles
  * 
  */
-const { width } = Dimensions.get("window");
-const { height } = Dimensions.get("window");
 
 export const Logo = styled.Image`
   width: 150px;
