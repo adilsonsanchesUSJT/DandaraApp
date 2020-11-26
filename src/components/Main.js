@@ -45,6 +45,12 @@ export const TextStart = styled.Text`
   font-size: 18;
 `
 
+/**
+* 
+* @endregion 
+* 
+*/
+
 const Main = ({ navigation }) => {
   return (
     <>
@@ -52,7 +58,7 @@ const Main = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <ContainerImage source={require('../assets/home.png')}>
           <Logo source={require('../assets/logo.png')} />
-          <TouchableStart onPress={() => navigation.navigate("Home")}>
+          <TouchableStart onPress={() => navigation.navigate("Login")}>
             <TextStart>Vamos começar?</TextStart>
           </TouchableStart>
         </ContainerImage>
