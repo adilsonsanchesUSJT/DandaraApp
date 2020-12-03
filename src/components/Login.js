@@ -193,7 +193,7 @@ const Login = ({ navigation }) => {
           </TouchableWithoutFeedback>
           <ContainerRegister>
             <TextRegister>Não tem uma conta?</TextRegister>
-            <TextRegisterClick>Cadastre-se</TextRegisterClick>
+            <TextRegisterClick onPress={() => navigation.navigate('Register')}>Cadastre-se</TextRegisterClick>
           </ContainerRegister>
         </ContainerImage>
       </View>
