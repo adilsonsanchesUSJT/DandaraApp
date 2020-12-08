@@ -32,6 +32,7 @@ export const Input = styled.TextInput`
   width: 83%;
   align-self: center;
   padding-left: 15px;
+  background-color: white;
 `;
 
 export const InputAddress1 = styled.TextInput`
@@ -42,6 +43,7 @@ export const InputAddress1 = styled.TextInput`
   width: 60%;
   margin-left: 35px;
   padding-left: 15px;
+  background-color: white;
 `;
 
 export const InputAddress2 = styled.TextInput`
@@ -52,6 +54,7 @@ export const InputAddress2 = styled.TextInput`
   width: 20%;
   margin-left: 10px;
   padding-left: 15px;
+  background-color: white;
 `;
 
 export const InputAddress3 = styled.TextInput`
@@ -62,6 +65,7 @@ export const InputAddress3 = styled.TextInput`
   width: 40%;
   margin-left: 20;
   padding-left: 15px;
+  background-color: white;
 `;
 
 /**

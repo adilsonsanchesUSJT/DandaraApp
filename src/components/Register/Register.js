@@ -82,7 +82,7 @@ export const TouchableNext = styled.TouchableOpacity`
 export const TextTouchableNext = styled.Text`
   font-size: 17px;
   color: white;
-`
+`;
 /**
 * 
 * @endregion 

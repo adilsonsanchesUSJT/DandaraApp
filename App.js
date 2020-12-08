@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { View, Alert, YellowBox } from 'react-native';
+import { View, LogBox } from 'react-native';
 
 // redux library 
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -15,11 +15,7 @@ import index from './src/store/reducers/index';
 // navigation
 import useNavigation from './src/navigation/useNavigation';
 
-// socket
-import WebSocketSignalR from './src/utilities/WebSocketSignalR'
-
 // utils
-YellowBox.ignoreWarnings(['Remote debugger']);
 
 
 /**
