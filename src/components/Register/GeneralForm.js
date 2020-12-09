@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { View, KeyboardAvoidingView, Platform } from 'react-native';
+
+import { firstForm } from '../../store/actions/registerActions'
+
+import PubSub from 'pubsub-js';
+
+import { useInterval } from '../../utilities/useInterval'
 
 import styled from 'styled-components';
 
@@ -79,82 +86,127 @@ const kTypeHere = "Digite aqui";
 const kPlaceholderColor = "#ACACAC";
 
 
-export const GeneralForm = () => (
-  <View>
-    <FirstContainer>
-      <InfoInput>Qual é o seu nome completo?</InfoInput>
-      <Input
-        placeholder={kTypeHere}
-        placeholderTextColor={kPlaceholderColor}
-      />
-    </FirstContainer>
-    <ContainerGenerals>
-      <InfoInput>Qual é a data do seu nascimento?</InfoInput>
-      <Input
-        placeholder={kTypeHere}
-        placeholderTextColor={kPlaceholderColor}
-      />
-    </ContainerGenerals>
+export const GeneralForm = ({ onChange }) => {
 
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
+  // STATE
+  const [name, setName] = useState("");
+  const [dataNasc, setDataNasc] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cep, setCep] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [uf, setUf] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    PubSub.subscribe('GENERAL_FORM', () => {
+      //  dispatch(firstForm(name, dataNasc, logradouro, numero, bairro, cep, cidade, uf, email, password))
+    });
+  }, [])
+
+  return (
+    <View>
+      <FirstContainer>
+        <InfoInput>Qual é o seu nome completo?</InfoInput>
+        <Input
+          placeholder={kTypeHere}
+          placeholderTextColor={kPlaceholderColor}
+          onChangeText={value => setName(value)}
+          value={name}
+        />
+      </FirstContainer>
       <ContainerGenerals>
-        <InfoInput>Qual é o seu endereço?</InfoInput>
-        <View style={{ flexDirection: 'row' }}>
-          <InputAddress1
-            placeholder={'Logradouro'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-          <InputAddress2
-            placeholder={'Nº'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-        </View>
-        <View style={{ flexDirection: 'row', marginTop: 15, marginLeft: 15 }}>
-          <InputAddress3
-            placeholder={'Bairro'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-          <InputAddress3
-            placeholder={'CEP'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-        </View>
-        <View style={{ flexDirection: 'row', marginTop: 15 }}>
-          <InputAddress1
-            placeholder={'Cidade'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-          <InputAddress2
-            placeholder={'UF'}
-            placeholderTextColor={kPlaceholderColor}
-          />
-        </View>
+        <InfoInput>Qual é a data do seu nascimento?</InfoInput>
+        <Input
+          placeholder={kTypeHere}
+          placeholderTextColor={kPlaceholderColor}
+          onChangeText={(value) => setDataNasc(value)}
+          value={dataNasc}
+        />
       </ContainerGenerals>
 
-      <ContainerGenerals>
-        <InfoInput>Qual é o seu email?</InfoInput>
-        <Input
-          placeholder={kTypeHere}
-          placeholderTextColor={kPlaceholderColor}
-          type={'mail'}
-        />
-      </ContainerGenerals>
-      <ContainerGenerals>
-        <InfoInput>Crie uma senha de 6 digitos?</InfoInput>
-        <Input
-          placeholder={kTypeHere}
-          placeholderTextColor={kPlaceholderColor}
-          secureTextEntry={true}
-        />
-      </ContainerGenerals>
-      <ContainerGenerals>
-        <InfoInput>Por favor, repita a senha</InfoInput>
-        <Input
-          placeholder={kTypeHere}
-          placeholderTextColor={kPlaceholderColor}
-          secureTextEntry={true}
-        />
-      </ContainerGenerals>
-    </KeyboardAvoidingView>
-  </View>
-);
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
+        <ContainerGenerals>
+          <InfoInput>Qual é o seu endereço?</InfoInput>
+          <View style={{ flexDirection: 'row' }}>
+            <InputAddress1
+              placeholder={'Logradouro'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setLogradouro(value)}
+              value={logradouro}
+            />
+            <InputAddress2
+              placeholder={'Nº'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setNumero(value)}
+              value={numero}
+            />
+          </View>
+          <View style={{ flexDirection: 'row', marginTop: 15, marginLeft: 15 }}>
+            <InputAddress3
+              placeholder={'Bairro'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setBairro(value)}
+              value={bairro}
+            />
+            <InputAddress3
+              placeholder={'CEP'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setCep(value)}
+              value={cep}
+            />
+          </View>
+          <View style={{ flexDirection: 'row', marginTop: 15 }}>
+            <InputAddress1
+              placeholder={'Cidade'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setCidade(value)}
+              value={cidade}
+            />
+            <InputAddress2
+              placeholder={'UF'}
+              placeholderTextColor={kPlaceholderColor}
+              onChangeText={(value) => setUf(value)}
+              value={uf}
+            />
+          </View>
+        </ContainerGenerals>
+
+        <ContainerGenerals>
+          <InfoInput>Qual é o seu email?</InfoInput>
+          <Input
+            placeholder={kTypeHere}
+            placeholderTextColor={kPlaceholderColor}
+            type={'mail'}
+            onChangeText={(value) => setEmail(value)}
+            value={email}
+          />
+        </ContainerGenerals>
+        <ContainerGenerals>
+          <InfoInput>Crie uma senha de 6 digitos?</InfoInput>
+          <Input
+            placeholder={kTypeHere}
+            placeholderTextColor={kPlaceholderColor}
+            secureTextEntry={true}
+            onChangeText={(value) => setPassword(value)}
+            value={password}
+          />
+        </ContainerGenerals>
+        <ContainerGenerals>
+          <InfoInput>Por favor, repita a senha</InfoInput>
+          <Input
+            placeholder={kTypeHere}
+            placeholderTextColor={kPlaceholderColor}
+            secureTextEntry={true}
+          />
+        </ContainerGenerals>
+      </KeyboardAvoidingView>
+    </View>
+  );
+
+}

@@ -1,3 +1,3 @@
-export const ChatConsts = {
-    NEW_MESSAGES: 'NEW_MESSAGES',
+export const ContantsApplication = {
+    REGISTER_USER: 'REGISTER_USER',
 }

@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 
 import React from 'react';
 
-import { View, LogBox } from 'react-native';
+import { View } from 'react-native';
 
 // redux library 
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -16,6 +16,7 @@ import index from './src/store/reducers/index';
 import useNavigation from './src/navigation/useNavigation';
 
 // utils
+console.disableYellowBox = true
 
 
 /**

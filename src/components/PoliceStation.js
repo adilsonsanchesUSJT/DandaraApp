@@ -5,10 +5,12 @@ import {
   StatusBar,
   Image,
   ScrollView,
-  Linking
+  SafeAreaView,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 
-import { Container, Header, Left, Right, Button } from 'native-base';
+import { Header, Left, Right, Button } from 'native-base';
 
 import styled from 'styled-components';
 
@@ -44,8 +46,19 @@ export const Avatar = styled.Image`
   border-color: #CB6CE6;
 `;
 
+export const Location = styled.Image`
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  resize-mode: contain;
+`;
+
 export const ContainerName = styled.View`
   flex: 1;
+  margin-left: 10px;
+`;
+
+export const ContainerNameDelegacia = styled.View`
   margin-left: 10px;
 `;
 
@@ -95,7 +108,7 @@ export const ClickTextMore = styled.Text`
 `;
 
 export const Separator = styled.View`
-  margin-top: 50;
+  margin-top: 30;
   width: 80%;
   border-color: #C4C4C4;
   border-width: 1;
@@ -103,16 +116,21 @@ export const Separator = styled.View`
   justify-content: center;
 `;
 
-export const ContainerTelephoneText = styled.View`
-  flex-direction: row;
-  margin-left: 50px;
-  align-items: center;
+export const ContainerDelegaciaText = styled.View`
+  margin-left: 30px;
+  margin-top: 20px;
 `;
 
-export const TelephoneText = styled.Text`
+export const DelegaciaText = styled.Text`
   margin-left: 15;
   font-weight: bold;
   font-size: 25px;
+`;
+
+export const DelegaciaDescription = styled.Text`
+  margin-left: 15;
+  font-size: 16px;
+  width: 300px
 `;
 
 export const TouchableContainerContact = styled.TouchableOpacity`
@@ -144,6 +162,34 @@ export const TextPhone = styled.Text`
   font-weight: bold;
 `;
 
+export const ContainerInfoDelegacias = styled.View`
+  margin-left: 30px;
+  padding-top: 15px;
+  flex-direction: row;
+`;
+
+export const TextItens = styled.Text`
+  margin-top: 10px;
+  font-size: 15px;
+  color: #6F6F6F
+  width: 200px;
+`;
+
+export const TouchableNext = styled.TouchableOpacity`
+  margin-left: 30px;
+  margin-top: 45px;
+  padding: 15px;
+  background-color: #CB6CE6;
+  border-radius: 30px;
+  width: 40%;
+  align-items: center;
+  shadow-opacity: 0.2;
+`;
+
+export const TextTouchableNext = styled.Text`
+  font-size: 17px;
+  color: white;
+`;
 
 /**
 * 
@@ -151,7 +197,7 @@ export const TextPhone = styled.Text`
 * 
 */
 
-const Home = ({ navigation }) => {
+const PoliceStation = ({ navigation }) => {
 
 
   /**
@@ -159,19 +205,30 @@ const Home = ({ navigation }) => {
    * @param {Integer} phone 
    * @returns {Component}
    */
-  const returnContacts = (description, phone) => (
-    <TouchableContainerContact onPress={() => Linking.openURL(`tel:${phone}`)}>
-      <ContainerContacts>
-        <TextDescriptionContacts>{description}</TextDescriptionContacts>
-        <TextPhone>{phone}</TextPhone>
-      </ContainerContacts>
-    </TouchableContainerContact>
+  const returnDelegacias = (title, description) => (
+    <View style={{ marginTop: 30 }}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 30 }}>{title}</Text>
+
+      <View style={{ flexDirection: 'row' }}>
+        <ContainerInfoDelegacias>
+          <Location source={require('../assets/location.png')} />
+          <ContainerNameDelegacia>
+            <TextItens>{description}</TextItens>
+          </ContainerNameDelegacia>
+        </ContainerInfoDelegacias>
+        <View style={{ marginLeft: 'auto', paddingRight: 30, flexDirection: 'row', alignItems: 'center' }}>
+          <Image source={require('../assets/telephone.png')} />
+          <TouchableOpacity style={{ marginLeft: 15 }} onPress={() => ""}>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   )
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <Container style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar barStyle="dark-content" />
         <Header>
           <Left>
             <Button transparent>
@@ -179,7 +236,7 @@ const Home = ({ navigation }) => {
             </Button>
           </Left>
           <Right>
-            <Button transparent onPress={() => navigation.navigate('PoliceStation')}>
+            <Button transparent>
               <Menu source={require('../assets/menu.png')} />
             </Button>
           </Right>
@@ -192,30 +249,30 @@ const Home = ({ navigation }) => {
               <TextDescription>Estamos aqui para ajuda-la!</TextDescription>
             </ContainerName>
           </ContainerInfo>
-          <TouchableEmergency>
-            <TextEmergency>Botão de Emergência</TextEmergency>
-          </TouchableEmergency>
-
-          <ClickMeContainer>
-            <ClickTextUnderline>Clique aqui</ClickTextUnderline>
-            <ClickTextMore>para configurá-lo</ClickTextMore>
-          </ClickMeContainer>
 
           <Separator />
 
           <View style={{ marginTop: 15 }}>
-            <ContainerTelephoneText>
-              <Image source={require('../assets/phone.png')} />
-              <TelephoneText>Telefones</TelephoneText>
-            </ContainerTelephoneText>
-            {returnContacts("Rede de Atendimento à Mulher", 188)}
-            {returnContacts("Polícia Militar", 190)}
-            {returnContacts("Corpo de Bombeiros", 193)}
+            <ContainerDelegaciaText>
+              <DelegaciaText>Delegacias</DelegaciaText>
+              <DelegaciaDescription>Encontramos as delegacias mais próximas de você</DelegaciaDescription>
+            </ContainerDelegaciaText>
+            <View style={{ alignSelf: 'center', marginTop: 20 }}><Image source={require('../assets/delegacia.png')}></Image></View>
+
+            <View style={{ marginTop: 15 }}>
+              {returnDelegacias('Delegacia Geral de Polícia', 'Delegacia de Polícia Rua São Bento, 380 (11) 3112 2163')}
+              {returnDelegacias('Delegacia Geral de Polícia', 'Delegacia de Polícia Av. Cásper Líbero, 370 (11) 3221 3498')}
+              {returnDelegacias('Delegacia Geral de Polícia', 'Delegacia de Polícia Praça Alfredo Issa, 57 (11) 3337-6020')}
+              {returnDelegacias('Deatur Delegacia Especializada em Atendimento ao Turista', 'Delegacia de Polícia R. Cantareira, 390 (11) 3120 4417')}
+            </View>
+            <TouchableNext onPress={() => navigation.goBack()}>
+              <TextTouchableNext>Voltar</TextTouchableNext>
+            </TouchableNext>
           </View>
         </ScrollView>
-      </Container>
+      </SafeAreaView>
     </>
   );
 };
 
-export default Home;
+export default PoliceStation;

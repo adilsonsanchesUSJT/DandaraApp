@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 
-import chatReducer from '../reducers/chatReducer'
+import registerReducer from './registerReducer'
 
 /**
  * @returns {combineReducers}
  */
 const appReducer = combineReducers({
-  chat: chatReducer
+  register: registerReducer
 });
 
 export default appReducer;

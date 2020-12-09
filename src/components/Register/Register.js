@@ -6,6 +6,8 @@ import { Header, Left, Button } from 'native-base';
 import styled from 'styled-components';
 import StepIndicator from 'react-native-step-indicator';
 
+import PubSub from 'pubsub-js';
+
 // Forms componentes
 import { GeneralForm } from './GeneralForm'
 import { DocumentsForm } from './DocumentsForm'
@@ -95,8 +97,10 @@ const Register = ({ navigation }) => {
   const [currentPosition, setCurrentPosition] = useState(0);
 
   useEffect(() => {
-    setCurrentPosition(0);
-  }, []);
+    if (currentPosition === 1) PubSub.publish('GENERAL_FORM');
+    if (currentPosition === 2) PubSub.publish('DOCUMENTS_FORM');
+    if (currentPosition === 3) PubSub.publish('ANGEL_FORM');
+  }, [currentPosition]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -125,6 +129,7 @@ const Register = ({ navigation }) => {
         {currentPosition === 0 && <GeneralForm />}
         {currentPosition === 1 && <DocumentsForm />}
         {currentPosition === 2 && <AngelForm />}
+        {currentPosition === 3 && navigation.navigate("Home")}
 
         <ContainerButtons>
           <TouchableBack onPress={() => navigation.goBack()}>

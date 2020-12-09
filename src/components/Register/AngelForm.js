@@ -109,7 +109,6 @@ export const TextItens = styled.Text`
   margin-top: 10px;
   font-size: 15px;
   color: #6F6F6F
-
 `;
 /**
 * 
